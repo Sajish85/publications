@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GPU telemetry-loss alerts for NVIDIA dcgm-exporter: rules, tests and a short technical note (v1.0)</title>
+<meta name="citation_title" content="GPU telemetry-loss alerts for NVIDIA dcgm-exporter: rules, tests and a short technical note (v1.0)">
+<meta name="citation_author" content="Sajish Krishnan">
+<meta name="citation_publication_date" content="2026/11/18">
+<meta name="citation_pdf_url" content="https://sajish85.github.io/publications/gpu-telemetry-loss-alerts/paper.pdf">
+<meta name="citation_doi" content="10.5281/zenodo.24360181">
+<meta name="description" content="Three Prometheus alert rules that fire when GPU telemetry from NVIDIA dcgm-exporter stops arriving, with promtool unit tests, mutation tests and a short technical note.
+The two cases that matter most:(1) The exporter answers scrapes but serves no GPU series. dcgm-exporter&#x27;s /health handler writ">
+<style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.6;color:#1a1a1a}h1{font-size:25px;line-height:1.3}a{color:#0645ad}.meta{color:#555}</style>
+</head>
+<body>
+<h1>GPU telemetry-loss alerts for NVIDIA dcgm-exporter: rules, tests and a short technical note (v1.0)</h1>
+<p class="meta"><strong>Sajish Krishnan</strong> · Independent researcher · ORCID: <a href="https://orcid.org/0009-0009-7561-9290">0009-0009-7561-9290</a><br>
+Published 2026-11-18 · DOI: <a href="https://doi.org/10.5281/zenodo.24360181">10.5281/zenodo.24360181</a> · Licence: CC BY 4.0</p>
+<h2>Abstract</h2>
+<p>Three Prometheus alert rules that fire when GPU telemetry from NVIDIA dcgm-exporter stops arriving, with promtool unit tests, mutation tests and a short technical note.
+The two cases that matter most:(1) The exporter answers scrapes but serves no GPU series. dcgm-exporter&#x27;s /health handler writes OK without checking DCGM collection (server.go lines 616&amp;ndash;642 at tag 4.9.0), so up stays 1 and every GPU alert loses its input.(2) A short exporter blackout, such as a pod replaced by its DaemonSet within about a minute (modelled on krkn Scenario C), should not page. A unit test asserts that it doesn&#x27;t.
+Rules: DCGMExporterDown (up == 0), DCGMExporterTargetsMissing (absent(up{...})), DCGMExporterNoGPUMetrics (up == 1 unless on (instance) DCGM_FI_DEV_GPU_UTIL_RATIO). The main file uses dcgm-exporter 4.9.0 metric names. A 4.8.x variant is included.
+Testing disclosure: validated with promtool unit and mutation tests on synthetic series; metric names checked against the exporter&#x27;s default counters; not run against a live exporter or GPU.
+Contents: rule files (4.9.0 and 4.8.x), 6 unit cases per file, a 4-mutant check, a cross-check showing the metric-name port matters, the raw output of every check (TEST-OUTPUTS.md), the metric-name evidence (METRIC-NAMES.md), copies of the upstream files the checks relied on, and the note (PDF). Run everything with: make test.
+Tested with promtool 3.5.0. No GPU, exporter, cluster or Prometheus server was involved.</p>
+<p><a href="paper.pdf"><strong>Download the paper (PDF)</strong></a> · <a href="https://github.com/Sajish85/gpu-telemetry-loss-alerts">Code and data (GitHub)</a> · <a href="https://doi.org/10.5281/zenodo.24360181">Zenodo record</a></p>
+<p><a href="../">All publications</a></p>
+</body>
+</html>

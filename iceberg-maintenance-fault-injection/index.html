@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fault Injection and Verification for Lakehouse Table Maintenance: Crash-Testing Apache Iceberg Compaction, Snapshot Expiry and Orphan Removal</title>
+<meta name="citation_title" content="Fault Injection and Verification for Lakehouse Table Maintenance: Crash-Testing Apache Iceberg Compaction, Snapshot Expiry and Orphan Removal">
+<meta name="citation_author" content="Sajish Krishnan">
+<meta name="citation_publication_date" content="2026/11/20">
+<meta name="citation_pdf_url" content="https://sajish85.github.io/publications/iceberg-maintenance-fault-injection/paper.pdf">
+<meta name="citation_doi" content="10.5281/zenodo.24412833">
+<meta name="description" content="Apache Iceberg tables need regular maintenance: small-file compaction (rewrite_data_files), snapshot expiry (expire_snapshots) and orphan-file removal (remove_orphan_files). These operations delete or replace files that readers and writers depend on, while ingestion continues. I built a fault-inject">
+<style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.6;color:#1a1a1a}h1{font-size:25px;line-height:1.3}a{color:#0645ad}.meta{color:#555}</style>
+</head>
+<body>
+<h1>Fault Injection and Verification for Lakehouse Table Maintenance: Crash-Testing Apache Iceberg Compaction, Snapshot Expiry and Orphan Removal</h1>
+<p class="meta"><strong>Sajish Krishnan</strong> · Independent researcher · ORCID: <a href="https://orcid.org/0009-0009-7561-9290">0009-0009-7561-9290</a><br>
+Published 2026-11-20 · DOI: <a href="https://doi.org/10.5281/zenodo.24412833">10.5281/zenodo.24412833</a> · Licence: CC BY 4.0</p>
+<h2>Abstract</h2>
+<p>Apache Iceberg tables need regular maintenance: small-file compaction (rewrite_data_files), snapshot expiry (expire_snapshots) and orphan-file removal (remove_orphan_files). These operations delete or replace files that readers and writers depend on, while ingestion continues. I built a fault-injection (chaos engineering) checker that runs each operation against a live ingest, kills or pauses maintenance at chosen phases, then checks the table against a ledger of acknowledged writes. The checker scores three classes separately: A (data integrity), B (retained snapshots and tags), and C (whether a maintenance call&#x27;s reported progress matches what committed). An independent reader (pyiceberg) repeats the A and B checks on every cell. I ran 123 cells on three builds (1.7.1, 1.12.0, and main at commit 2d89aa4): 369 cells in total. Classes A and B recorded no violation in any of the 369 cells; the two readers never disagreed. I found no novel violation. The only class C flags map to an existing, open issue (#17202): a partial-progress rewrite returns success while only some commits land after a concurrent expiry removes its starting snapshot. The signature appeared in 8 of 8 in-matrix race cells on 1.7.1. A gated re-run forcing real overlap between the expiry commit and the rewrite&#x27;s commits flagged 3 of 3 cells on 1.7.1, 8 of 8 on 1.12.0 and 7 of 8 on main. Reported counts were exact in every flagged cell; only failed_data_files_count = 0 misleads. A positive control for live-file deletion (#17304, closed as spec-discouraged and contested) is detected by classes A and B on all three builds through the core API, but not through the Spark procedure or on a tagged table. The negative result is narrow: it covers an unpartitioned, append-only, tagged table, a Postgres JDBC catalog and single-node MinIO, and cannot speak to the phases my rig never reached.</p>
+<p><a href="paper.pdf"><strong>Download the paper (PDF)</strong></a> · <a href="https://github.com/Sajish85/iceberg-maintenance-fault-injection">Code and data (GitHub)</a> · <a href="https://doi.org/10.5281/zenodo.24412833">Zenodo record</a></p>
+<p><a href="../">All publications</a></p>
+</body>
+</html>
