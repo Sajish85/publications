@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Disclosure Effect in LLM Root Cause Analysis: A Truthful Notice About One Injected Fault Suppresses Diagnosis of a Hidden Second Fault</title>
+<meta name="citation_title" content="The Disclosure Effect in LLM Root Cause Analysis: A Truthful Notice About One Injected Fault Suppresses Diagnosis of a Hidden Second Fault">
+<meta name="citation_author" content="Sajish Krishnan">
+<meta name="citation_publication_date" content="2026/11/21">
+<meta name="citation_pdf_url" content="https://sajish85.github.io/publications/disclosure-effect-llm-root-cause-analysis/paper.pdf">
+<meta name="citation_doi" content="10.5281/zenodo.24414407">
+<meta name="description" content="Incident responders are often told which fault a planned fault-injection experiment injected. We ask whether that truthful notice changes whether an LLM responder doing root cause analysis finds a second, independent cause that was not disclosed. The test material is the hybrid (two-fault) subset of">
+<style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.6;color:#1a1a1a}h1{font-size:25px;line-height:1.3}a{color:#0645ad}.meta{color:#555}</style>
+</head>
+<body>
+<h1>The Disclosure Effect in LLM Root Cause Analysis: A Truthful Notice About One Injected Fault Suppresses Diagnosis of a Hidden Second Fault</h1>
+<p class="meta"><strong>Sajish Krishnan</strong> · Independent researcher · ORCID: <a href="https://orcid.org/0009-0009-7561-9290">0009-0009-7561-9290</a><br>
+Published 2026-11-21 · DOI: <a href="https://doi.org/10.5281/zenodo.24414407">10.5281/zenodo.24414407</a> · Licence: CC BY 4.0</p>
+<h2>Abstract</h2>
+<p>Incident responders are often told which fault a planned fault-injection experiment injected. We ask whether that truthful notice changes whether an LLM responder doing root cause analysis finds a second, independent cause that was not disclosed. The test material is the hybrid (two-fault) subset of OpenRCA 2.0: eighteen cases in which a prominent injected fault and a subtle second fault are present in the same window, both discoverable from the same telemetry, with telemetry byte-identical between experimental arms. Each case is replayed under four prompt conditions — no notice, a neutral notice, a truthful notice naming the injected fault and its target, and the truthful notice plus one counteracting sentence — to three LLM diagnosers, with three repeats per cell: 864 runs. On cases where the hidden fault was found at least once without the notice, the truthful notice reduced hidden-fault recall for one diagnoser by −0.896 (95% CI −1.000 to −0.771, 16 at-risk cases); a second diagnoser moved the same way, inconclusively (−0.156, CI −0.356 to 0.000, 15 cases); a third showed no measurable effect (−0.020, CI −0.176 to +0.098, 17 cases). The neutral notice had no detectable effect for any diagnoser. The counteracting sentence recovered about 60% of the strong diagnoser&#x27;s loose-score loss and none of its strict-score loss. We claim a per-diagnoser effect, not a general law about LLM responders: telling the responder what was done can stop it looking for what else is wrong, and whether it does depends on the diagnoser.</p>
+<p><a href="paper.pdf"><strong>Download the paper (PDF)</strong></a> · <a href="https://github.com/Sajish85/disclosure-effect-llm-root-cause-analysis">Code and data (GitHub)</a> · <a href="https://doi.org/10.5281/zenodo.24414407">Zenodo record</a></p>
+<p><a href="../">All publications</a></p>
+</body>
+</html>
